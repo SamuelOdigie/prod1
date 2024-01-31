@@ -28,7 +28,7 @@ export default function Home() {
     e.preventDefault();
     const id = parseInt(statusId);
     if (!Number.isInteger(id)) {
-      setError("Please enter a number");
+      alert("Please enter a number");
     } else {
       setError("");
     }
@@ -37,7 +37,7 @@ export default function Home() {
       setData(responseData);
       setError("");
     } else {
-      setError("Failed to fetch data");
+      setError("failed to fetch tasks");
     }
     console.log(responseData);
   };
@@ -70,7 +70,7 @@ export default function Home() {
                 className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
                 value={statusId}
                 onChange={handleInputChange}
-                type="number"
+                type="text"
                 placeholder="Product Status ID"
                 aria-label="Product Status ID"
               />
