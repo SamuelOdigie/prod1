@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function Home() {
+  const [statusId, setStatusId] = useState("");
+  const [error, setError] = useState("");
+
+  const handleInputChange = (e) => {
+    setStatusId(e.target.value);
+    setError("");
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const id = parseInt(statusId);
+    if (!Number.isInteger(id)) {
+      setError("Please enter a number");
+    } else {
+      setError("");
+    }
+  };
   return (
     <div>
-      {/* Navbar */}
       <nav className="bg-gray-700 text-white p-4">
         <div className="container mx-auto flex justify-between">
           <a href="#" className="font-bold">
@@ -23,28 +38,27 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Main Content */}
       <div className="container mx-auto my-10">
         <div className="flex flex-col items-center">
-          {/* Form */}
-          <form className="w-full max-w-sm">
+          <form className="w-full max-w-sm" onSubmit={handleSubmit}>
             <div className="flex items-center border-b border-gray-700 py-2">
               <input
                 className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-                type="number"
+                value={statusId}
+                onChange={handleInputChange}
+                type="text"
                 placeholder="Product Status ID"
                 aria-label="Product Status ID"
               />
               <button
                 className="flex-shrink-0 bg-gray-700 hover:bg-gray-500 border-gray-700 hover:border-gray-500 text-sm border-4 text-white py-1 px-2 rounded"
-                type="button"
+                type="submit"
               >
                 Submit
               </button>
             </div>
+            {error && <p className="text-red-500">{error}</p>}
           </form>
-
-          {/* Image */}
           <div className="fixed bottom-0 right-0 m-4">
             <img src="/images.png" alt="Your Image" className="my-4" />
           </div>
