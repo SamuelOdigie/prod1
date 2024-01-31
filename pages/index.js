@@ -83,6 +83,18 @@ export default function Home() {
             </div>
             {error && <p className="text-red-500">{error}</p>}
           </form>
+          {data && data.task_ids && (
+            <div>
+              <h2>Task IDs</h2>
+              <ul>
+                {data.task_ids.map((task, index) => (
+                  <li key={index}>
+                    <p>Task ID: {task.id}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
           <div className="fixed bottom-0 right-0 m-4">
             <img src="/images.png" alt="Your Image" className="my-4" />
           </div>
