@@ -3,12 +3,28 @@ import React, { useState } from "react";
 export default function Home() {
   const [statusId, setStatusId] = useState("");
   const [error, setError] = useState("");
+  const [data, setData] = useState(null);
 
   const handleInputChange = (e) => {
     setStatusId(e.target.value);
     setError("");
   };
-  const handleSubmit = (e) => {
+  const fetchTasks = async (statusId) => {
+    try {
+      const response = await fetch(`/api/tasks?statusId=${statusId}`);
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Fetch error:", error);
+      return null;
+    }
+  };
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const id = parseInt(statusId);
     if (!Number.isInteger(id)) {
@@ -16,6 +32,14 @@ export default function Home() {
     } else {
       setError("");
     }
+    const responseData = await fetchTasks(id);
+    if (responseData) {
+      setData(responseData); 
+      setError("");
+    } else {
+      setError("Failed to fetch data");
+    }
+    console.log(responseData);
   };
   return (
     <div>
