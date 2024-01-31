@@ -34,7 +34,7 @@ export default function Home() {
     }
     const responseData = await fetchTasks(id);
     if (responseData) {
-      setData(responseData); 
+      setData(responseData);
       setError("");
     } else {
       setError("Failed to fetch data");
@@ -70,7 +70,7 @@ export default function Home() {
                 className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
                 value={statusId}
                 onChange={handleInputChange}
-                type="text"
+                type="number"
                 placeholder="Product Status ID"
                 aria-label="Product Status ID"
               />
